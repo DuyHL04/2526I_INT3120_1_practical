@@ -130,4 +130,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_indent"
         app:layout_constraintTop_toTopOf="@+id/guideline_end_of_first_block" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:enabled="false"
+        style="@style/Widget.Material3.Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+        app:layout_constraintTop_toBottomOf="@+id/rating_bar" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/saveButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
