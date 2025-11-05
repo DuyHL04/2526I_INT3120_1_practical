@@ -114,4 +114,20 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_indent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/juice_rating"
+        android:labelFor="@id/rating_bar"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_end_of_first_block" />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:rating="3"
+        android:stepSize="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_indent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_end_of_first_block" />
 </androidx.constraintlayout.widget.ConstraintLayout>
