@@ -1,6 +1,7 @@
 package com.example.juicetracker
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -86,5 +87,9 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
         binding.cancelButton.setOnClickListener {
             dismiss()
         }
+    }
+    private fun findColorIndex(color: String): Int {
+        val juiceColor = JuiceColor.valueOf(color)
+        return JuiceColor.values().indexOf(juiceColor)
     }
 }
