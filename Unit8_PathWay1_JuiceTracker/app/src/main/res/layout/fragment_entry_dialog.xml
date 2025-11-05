@@ -74,4 +74,26 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/name"
         app:layout_constraintEnd_toStartOf="@+id/guideline_left_indent"
         app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_indent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/desciption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/description"
+        android:text="@string/juice_description"
+        app:layout_constraintBaseline_toBaselineOf="@+id/description"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left_indent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 </androidx.constraintlayout.widget.ConstraintLayout>
