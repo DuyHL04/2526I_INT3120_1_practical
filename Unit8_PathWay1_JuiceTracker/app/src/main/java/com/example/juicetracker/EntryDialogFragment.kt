@@ -1,16 +1,19 @@
 package com.example.juicetracker
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.R.layout
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import com.example.juicetracker.data.Juice
 import com.example.juicetracker.data.JuiceColor
 import com.example.juicetracker.databinding.FragmentEntryDialogBinding
 import com.example.juicetracker.ui.AppViewModelProvider
@@ -30,7 +33,7 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
         return FragmentEntryDialogBinding.inflate(inflater, container, false).root
     }
     var selectedColor: JuiceColor = JuiceColor.Red
-
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentEntryDialogBinding.bind(view)
         val args: EntryDialogFragmentArgs by navArgs()
@@ -64,6 +67,24 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
         binding.name.doOnTextChanged { _, start, before, count ->
             binding.saveButton.isEnabled = (start+count) > 0
         }
-        
+        binding.colorSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            layout.support_simple_spinner_dropdown_item,
+            colorLabelMap.map { it.key }
+        )
+        binding.colorSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                val selected = parent.getItemAtPosition(pos).toString()
+                selectedColor = colorLabelMap[selected] ?: selectedColor
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                selectedColor = JuiceColor.Red
+            }
+        }
+
+        binding.cancelButton.setOnClickListener {
+            dismiss()
+        }
     }
 }
