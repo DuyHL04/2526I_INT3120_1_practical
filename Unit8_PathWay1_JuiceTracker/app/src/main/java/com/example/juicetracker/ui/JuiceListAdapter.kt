@@ -17,12 +17,14 @@ package com.example.juicetracker.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.runtime.Composition
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.juicetracker.data.Juice
 import com.example.juicetracker.data.JuiceColor
 import com.example.juicetracker.databinding.ListItemBinding
+import androidx.compose.ui.platform.ComposeView
 
 class JuiceListAdapter(
     private var onEdit: (Juice) -> Unit,
@@ -30,36 +32,21 @@ class JuiceListAdapter(
 ) : ListAdapter<Juice, JuiceListAdapter.JuiceListViewHolder>(JuiceDiffCallback()) {
 
     class JuiceListViewHolder(
-        private val binding: ListItemBinding,
+        private val composeView: ComposeView,
         private val onEdit: (Juice) -> Unit,
         private val onDelete: (Juice) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
-        private val nameView = binding.name
-        private val description = binding.description
-        private val drinkImage = binding.drinkColorOverlay
-        private val ratingBar = binding.ratingBar
-
+    ) : RecyclerView.ViewHolder(composeView) {
         fun bind(juice: Juice) {
-            nameView.text = juice.name
-            description.text = juice.description
-            drinkImage.setColorFilter(
-                JuiceColor.valueOf(juice.color).color,
-                android.graphics.PorterDuff.Mode.SRC_IN
-            )
-            ratingBar.rating = juice.rating.toFloat()
-            binding.deleteButton.setOnClickListener {
-                onDelete(juice)
-            }
-            binding.root.setOnClickListener {
-                onEdit(juice)
-            }
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = JuiceListViewHolder(
-        ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-        onEdit,
-        onDelete
+        return JuiceListViewHolder(
+            Composition(parent.context),
+            onEdit,
+            onDelete
+        )
     )
 
     override fun onBindViewHolder(holder: JuiceListViewHolder, position: Int) {
